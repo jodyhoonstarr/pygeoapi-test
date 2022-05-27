@@ -22,15 +22,19 @@ psql -h localhost -p 5433 -U postgres postgres
 
 Load dc 2021 tabblocks from [TIGER](https://www.census.gov/cgi-bin/geo/shapefiles/index.php?year=2021&layergroup=Blocks+%282020%29)
 ```shell
+# save archive to the testdata directory
+cd testdata
 unar ./tl_2021_dc_tabblock20.zip
-shp2pgsql -s 4269 -g the_geom ./testdata/tl_2021_11_tabblock20/tl_2021_11_tabblock20.shp blocks | psql -h localhost -p 5433 -U postgres postgres
+shp2pgsql -s 4269 -g the_geom ./tl_2021_11_tabblock20/tl_2021_11_tabblock20.shp blocks | psql -h localhost -p 5433 -U postgres postgres
 ```
 
 Load an osm shapefile that's more complex
 Pulled from [geofabrik](https://download.geofabrik.de/north-america/us/district-of-columbia-latest-free.shp.zip)
 ```shell
+# save archive to the testdata directory
+cd testdata
 unar ./district-of-columbia-latest-free.shp.zip
-shp2pgsql -s 4269 -g the_geom ./testdata/district-of-columbia-latest-free.shp/gis_osm_buildings_a_free_1.shp buildings | psql -h localhost -p 5433 -U postgres postgres
+shp2pgsql -s 4269 -g the_geom ./district-of-columbia-latest-free.shp/gis_osm_buildings_a_free_1.shp buildings | psql -h localhost -p 5433 -U postgres postgres
 ```
 
 Add datetime column
