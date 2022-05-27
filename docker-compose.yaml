@@ -1,0 +1,28 @@
+version: "3"
+
+services:
+
+  pygeoapi:
+    depends_on:
+      - postgres
+    image: geopython/pygeoapi:latest
+    ports:
+      - "5000:80" 
+    volumes:
+      - ./my.config.yml:/pygeoapi/local.config.yml
+
+  postgres:
+    image: postgis/postgis:13-3.2-alpine
+    ports:
+      - 5433:5432
+    environment:
+      POSTGRES_DB: postgres
+      POSTGRES_PASSWORD: password
+      POSTGRES_USER: postgres
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+
+volumes:
+  postgres_data:
+    driver: local
